@@ -8,6 +8,10 @@ public class Rectangles extends BasicGame {
     private float x;
     private float y;
     private float speed;
+    private Direction direction = Direction.RIGHT;
+
+    private enum Direction{RIGHT, DOWN, LEFT, UP};
+
 
     public Rectangles(String title) {
         super(title);
@@ -16,18 +20,41 @@ public class Rectangles extends BasicGame {
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
         this.x = 100;
-        this.speed = 10.0f;
+        this.y = 100;
+        this.speed = 2.0f;
     }
 
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
-        this.x += (float)delta/4.0;
-        this.y += (float)delta/4.0;
-
-        if (this.x>800){
-            this.x=0;
-            this.y=0;
+        if (direction == Direction.RIGHT) {
+            this.x += (float) delta / this.speed;
+            if (this.x > 600) {
+                direction = Direction.DOWN;
+            }
         }
+
+        if (direction == Direction.DOWN){
+            this.y += (float) delta / this.speed;
+            if (this.y > 400){
+                direction = Direction.LEFT;
+            }
+        }
+
+        if (direction == Direction.LEFT){
+            this.x -= (float) delta / this.speed;
+            if (this.x < 100){
+                direction = Direction.UP;
+            }
+        }
+
+        if (direction == Direction.UP){
+            this.y -= (float) delta / this.speed;
+            if (this.y < 100){
+                direction = Direction.RIGHT;
+            }
+        }
+
+        System.out.println("x<:" + this.x + " y:" + this.y);
     }
 
     @Override
