@@ -24,5 +24,9 @@ public class Ellipse implements Actor{
         this.x += (float)delta/this.speed;
         if(this.y>600){
             this.y = 0;
+        }
+        if(this.x>800){
+            this.x = 0;
+        }
     }
-}}
+}

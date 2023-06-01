@@ -8,6 +8,7 @@ public class Circle implements Actor{
     private float x,y;
     private float speed;
     private int diameter;
+    private float growthRate;
 
     public Circle() {
         Random random = new Random();
@@ -15,6 +16,7 @@ public class Circle implements Actor{
         this.y = random.nextInt(600);
         this.speed = random.nextInt(40) + 10;
         this.diameter = random.nextInt(20) + 20;
+        this.growthRate = random.nextFloat() * 0.9f + 0.4f;
     }
 
     public void render(Graphics graphics) {
@@ -26,5 +28,7 @@ public class Circle implements Actor{
         if(this.y>600){
             this.y = 0;
         }
+
+        this.diameter += growthRate;
     }
 }
